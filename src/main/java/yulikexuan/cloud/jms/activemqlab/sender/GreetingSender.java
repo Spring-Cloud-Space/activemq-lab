@@ -10,7 +10,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import yulikexuan.cloud.jms.activemqlab.config.JmsConfig;
-import yulikexuan.cloud.jms.activemqlab.domain.model.HelloWorldMessage;
+import yulikexuan.cloud.jms.activemqlab.domain.model.HelloArtemisMessage;
 
 import java.util.UUID;
 
@@ -26,12 +26,12 @@ public class GreetingSender {
         this.jmsTemplate = jmsTemplate;
     }
 
-    @Scheduled(initialDelay = 5000L, fixedDelay = 10000L)
+    @Scheduled(initialDelay = 5000L, fixedDelay = 60 * 60000L)
     public void sendMessage() {
 
         log.info(">>>>>>> Sending a greeting message to Artemis ... ... ");
 
-        HelloWorldMessage message = HelloWorldMessage.builder()
+        HelloArtemisMessage message = HelloArtemisMessage.builder()
                 .id(UUID.randomUUID())
                 .message("Hello Artemis!")
                 .build();

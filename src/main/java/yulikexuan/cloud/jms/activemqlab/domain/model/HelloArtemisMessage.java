@@ -1,4 +1,4 @@
-//: yulikexuan.cloud.jms.activemqlab.domain.model.HelloWorldMessage.java
+//: yulikexuan.cloud.jms.activemqlab.domain.model.HelloArtemisMessage.java
 
 
 package yulikexuan.cloud.jms.activemqlab.domain.model;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @Builder @AllArgsConstructor
-public class HelloWorldMessage implements Serializable {
+public class HelloArtemisMessage implements Serializable {
 
     static final long serialVersionUID = -6703826490277916847L;
 
