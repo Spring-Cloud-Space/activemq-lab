@@ -15,6 +15,7 @@ import org.springframework.jms.support.converter.MessageType;
 public class JmsConfig {
 
     public static final String GREETING_QUEUE_NAME = "Greeting_Queue";
+    public static final String GREETING_REPLYABLE_QUEUE_NAME = "Greeting_Replyable_Queue";
 
     @Bean
     public MessageConverter messageConverter() {
