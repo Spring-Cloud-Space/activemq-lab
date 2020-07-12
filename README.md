@@ -25,7 +25,9 @@
 - For Linux: 
   - ``` docker run -it --rm -p 8161:8161 -p 61616:61616 vromero/activemq-artemis ```
 
-### Spring Boot Set UP
+### Spring Boot Set Up for Artemis
+[activemq-artemis-docker](https://github.com/vromero/activemq-artemis-docker)
+
 #### application.yml
 ``` 
 spring:
