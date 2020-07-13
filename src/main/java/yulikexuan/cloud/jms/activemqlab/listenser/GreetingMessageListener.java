@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import yulikexuan.cloud.jms.activemqlab.config.JmsConfig;
 import yulikexuan.cloud.jms.activemqlab.domain.model.HelloArtemisMessage;
 
+import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import java.util.UUID;
@@ -31,24 +32,32 @@ public class GreetingMessageListener {
     public void listen(@Payload HelloArtemisMessage helloArtemisMessage,
                        @Headers MessageHeaders headers, Message message) {
 
-        log.info("------- Message Received ------- ");
-        log.info("\t>>>>>>> Message: {}", helloArtemisMessage);
-
-        // throw new RuntimeException(">>>>>>> For testing redelivery ... ");
+//        log.info("------- Message Received ------- ");
+//        log.info("\t>>>>>>> Message: {}", helloArtemisMessage);
+//
+//        // throw new RuntimeException(">>>>>>> For testing redelivery ... ");
     }
 
     @JmsListener(destination = JmsConfig.GREETING_REPLYABLE_QUEUE_NAME)
-    public void listenForHello(@Payload HelloArtemisMessage helloArtemisMessage,
-                       @Headers MessageHeaders headers, Message message) throws JMSException {
+    public void listenForHello(
+            @Payload HelloArtemisMessage helloArtemisMessage,
+            @Headers MessageHeaders headers,
+            Message message,
+            org.springframework.messaging.Message springMessage) throws JMSException {
 
-        log.info("\r\n------- Message Received ------- \r\n\t>>>>>>> Message: {}\r\n", helloArtemisMessage);
+        log.info("\r\n------- Message Received ------- \r\n\t>>>>>>> " +
+                "Message: {}\r\n", helloArtemisMessage);
 
         HelloArtemisMessage replyMsg = HelloArtemisMessage.builder()
                 .id(UUID.randomUUID())
                 .message("Artemis!")
                 .build();
 
-        this.jmsTemplate.convertAndSend(message.getJMSReplyTo(), replyMsg);
+        jmsTemplate.convertAndSend(
+                (Destination) springMessage.getHeaders().get("jms_replyTo"),
+                "got it!");
+
+        // this.jmsTemplate.convertAndSend(message.getJMSReplyTo(), replyMsg);
 
         // throw new RuntimeException(">>>>>>> For testing redelivery ... ");
     }

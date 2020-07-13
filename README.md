@@ -26,12 +26,13 @@
   - ``` docker run -it --rm -p 8161:8161 -p 61616:61616 vromero/activemq-artemis ```
 
 ### Spring Boot Set Up for Artemis
-[activemq-artemis-docker](https://github.com/vromero/activemq-artemis-docker)
 
-#### application.yml
-``` 
-spring:
-  artemis:
-    user: artemis
-    password: simetraehcapa
-```
+- [activemq-artemis-docker](https://github.com/vromero/activemq-artemis-docker)
+- [The Artemis Console](http://127.0.0.1:8161/)
+- application.yml
+    ``` 
+    spring:
+      artemis:
+        user: artemis
+        password: simetraehcapa
+    ```
